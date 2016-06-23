@@ -1,0 +1,43 @@
+<!doctype html>
+<html ng-app="sgtApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="https://code.angularjs.org/1.4.0/angular.js"></script>
+    <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
+    <!-- AngularFire -->
+    <script src="https://cdn.firebase.com/libs/angularfire/1.1.4/angularfire.js"></script>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body ng-controller="MainController as mc">
+<h1>Average: {{ mc.average() }}</h1>
+
+<!--// Student form-->
+<form ng-submit="submit()">
+    <input type="text" ng-model="mc.student.name" placeholder="Name"/>
+    <input type="text" ng-model="mc.student.course" placeholder="Course"/>
+    <input type="text" ng-model="mc.student.grade" placeholder="Grade"/>
+    <input type="submit" ng-click="mc.addStudent()" value="Add"/>
+</form>
+
+<!--Results display-->
+<table>
+    <tbody>
+    <tr>
+        <th>Student Name: </th>
+        <th>Student Course: </th>
+        <th>Student Grade: </th>
+    </tr>
+    <tr ng-repeat="(key, value) in data">
+        <td><input fb-bind type="text" data-fb-value="value.name" value="{{ value.name }}"></td>
+        <td><input fb-bind type="text"  data-fb-value="value.course" value="{{ value.course }}"></td>
+        <td><input fb-bind type="text" data-fb-value="value.grade" value="{{ value.grade }}"></td>
+        <td><input fb-bind type="submit" ng-click="mc.deleteStudent(key)" value="delete" /></td>
+    </tr>
+    </tbody>
+</table>
+<script src="script.js"></script>
+</body>
+</html>
